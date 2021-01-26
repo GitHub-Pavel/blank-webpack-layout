@@ -11,21 +11,9 @@ const isProd = !isDev
 
 const filename = ext => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`
 
-const target = () => {
-  let config = 'browserslist'
-
-  if (isDev) {
-    config = 'web'
-  }
-
-  return config
-}
-
 const plugins = () => {
   const basePlugins = [
     new HTMLWebpackPlugin({
-      template: path.resolve(__dirname, './src/pug/pages/index.pug'),
-      filename: path.resolve(__dirname, './dist/index.html'),
       minify: {
         collapseWhitespace: isProd
       }
@@ -94,10 +82,12 @@ const preprocessor = (items) => {
 module.exports = {
   context: path.resolve(__dirname, paths.src),
   mode: 'development',
-  entry: ['./js/main.js'],
+  entry: [
+    './js/main.js'
+  ],
   output: {
-    path: path.resolve(__dirname, `${paths.dist}/`),
     filename: `./js/${filename('js')}`,
+    path: path.resolve(__dirname, `${paths.dist}/`),
     publicPath: ''
   },
   resolve: {
@@ -108,6 +98,7 @@ module.exports = {
       '@fonts': path.resolve(__dirname, paths.src + '/fonts'),
       '@scss': path.resolve(__dirname, paths.src + '/scss'),
       '@modules': path.resolve(__dirname, paths.src + '/js/modules'),
+      '@js': path.resolve(__dirname, paths.src + '/js'),
       '@assets': path.resolve(__dirname, paths.src + '/assets')
     }
   },
@@ -190,5 +181,5 @@ module.exports = {
     compress: true,
     port: 4200
   },
-  target: target()
+  target: isDev ? 'web' : 'browserslist'
 }
