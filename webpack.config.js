@@ -1,40 +1,31 @@
 const path = require('path')
+const paths = require('./package.json').paths
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const OptimizeCssAssetsWebpaclPlugin = require('optimize-css-assets-webpack-plugin')
-const TerserWebpackPlugin = require('terser-webpack-plugin')
 const ImageminPlugin = require('imagemin-webpack')
-const paths = require('./package.json').paths
 
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev
 
 const filename = ext => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`
 
-const optimization = () => {
-  const configObj = {
-    splitChunks: {
-      chunks: 'all'
-    }
+const target = () => {
+  let config = 'browserslist'
+
+  if (isDev) {
+    config = 'web'
   }
 
-  if (isProd) {
-    configObj.minimizer = [
-      new OptimizeCssAssetsWebpaclPlugin(),
-      new TerserWebpackPlugin()
-    ]
-  }
-
-  return configObj
+  return config
 }
 
 const plugins = () => {
   const basePlugins = [
     new HTMLWebpackPlugin({
-      template: path.resolve(__dirname, paths.src + '/pug/pages/index.pug'),
-      filename: path.resolve(__dirname, paths.dist + '/index.html'),
+      template: path.resolve(__dirname, './src/pug/pages/index.pug'),
+      filename: path.resolve(__dirname, './dist/index.html'),
       minify: {
         collapseWhitespace: isProd
       }
@@ -103,10 +94,10 @@ const preprocessor = (items) => {
 module.exports = {
   context: path.resolve(__dirname, paths.src),
   mode: 'development',
-  entry: './js/main.js',
+  entry: ['./js/main.js'],
   output: {
+    path: path.resolve(__dirname, `${paths.dist}/`),
     filename: `./js/${filename('js')}`,
-    path: path.resolve(__dirname, paths.dist),
     publicPath: ''
   },
   resolve: {
@@ -120,12 +111,6 @@ module.exports = {
       '@assets': path.resolve(__dirname, paths.src + '/assets')
     }
   },
-  devServer: {
-    port: 4200,
-    hot: true,
-    inline: true
-  },
-  optimization: optimization(),
   plugins: plugins(),
   devtool: isProd ? false : 'source-map',
   module: {
@@ -144,7 +129,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: isDev
+              hmr: true
             }
           },
           'css-loader',
@@ -196,5 +181,14 @@ module.exports = {
         use: ['babel-loader']
       }
     ]
-  }
+  },
+  devServer: {
+    contentBase: paths.dist,
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    compress: true,
+    port: 4200
+  },
+  target: target()
 }
