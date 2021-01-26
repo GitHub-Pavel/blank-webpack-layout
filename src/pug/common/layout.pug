@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+  block head
+    head
+      meta(charset="utf-8")
+      title blank webpack layout 
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+      meta(http-equiv="X-UA-Compatible", content="ie=edge")
+      link(rel="shortcut icon", href="favicon.ico", type="image/x-icon")
+  body
+    main.wrapper
+      include /common/header
+      block content
+      include /common/footer
+    // wrapper
+    include /common/modals

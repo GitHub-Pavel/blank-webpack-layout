@@ -1,0 +1,167 @@
+/*
+ * ==================================================================================
+ * link
+ * ==================================================================================
+ */
+
+a {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    text-decoration: underline;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+/*
+ * ==================================================================================
+ * text
+ * ==================================================================================
+ */
+
+.text {
+    font-size: 1rem;
+
+    &--small {
+        font-size: 0.875rem;
+    }
+
+    &--big {
+        font-size: 1.125rem;
+    }
+
+    &--bold {
+        font-weight: $bold;
+    }
+    
+    &--light {
+        font-weight: $light;
+    }
+    
+    &--italic {
+        font-style: italic;
+    }
+
+    &--center {
+        text-align: center;
+    }
+
+    &--nowrap {
+        white-space: nowrap;
+    }
+}
+
+p {
+    margin-top: 30px;
+}
+
+.text {
+    margin-top: 0;
+}
+
+/*
+ * ==================================================================================
+ * buttons
+ * ==================================================================================
+ */
+
+.btn {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: $bold;
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    color: $white;
+    background: $black;
+    border: 1px solid $black;
+    border-radius: 3px;
+    transition: color 0.3s ease-in-out, background 0.3s ease-in-out, border-color 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out;
+}
+
+/*
+ * ==================================================================================
+ * visually-hidden
+ * ==================================================================================
+ */
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    clip: rect(0 0 0 0);
+}
+
+/*
+ * ==================================================================================
+ * title
+ * ==================================================================================
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-family: "Arial",sans-serif;
+    font-weight: $bold;
+}
+
+h1 {
+    font-size: 3rem;
+
+    @media (max-width: $sm + px) {
+        font-size: 2.5rem;
+    }
+}
+
+h2 {
+    font-size: 2.125rem;
+
+    @media (max-width: $sm + px) {
+        font-size: 2rem;
+    }
+}
+
+h3 {
+    font-size: 2rem;
+
+    @media (max-width: $sm + px) {
+        font-size: 1.875rem;
+    }
+}
+
+h4 {
+    font-size: 1.875rem;
+
+    @media (max-width: $sm + px) {
+        font-size: 1.625rem;
+    }
+}
+
+h5 {
+    font-size: 1.625rem;
+
+    @media (max-width: $sm + px) {
+        font-size: 1.5rem;
+    }
+}
+
+h6 {
+    font-size: 1.5rem;
+
+    @media (max-width: $sm + px) {
+        font-size: 1.325rem;
+    }
+}

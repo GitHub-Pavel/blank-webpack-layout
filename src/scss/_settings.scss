@@ -1,0 +1,92 @@
+/*
+ * ==================================================================================
+ * reset
+ * ==================================================================================
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*
+ * ==================================================================================
+ * html
+ * ==================================================================================
+ */
+
+html {
+    font-size: 16px;
+}
+
+/*
+ * ==================================================================================
+ * body
+ * ==================================================================================
+ */
+
+body {
+    color: $black-color;
+    font-family: "OpenSans", sans-serif;
+    font-size: 1rem;
+}
+
+/*
+ * ==================================================================================
+ * standart
+ * ==================================================================================
+ */
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.b-lazy {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.wrapper {
+    max-width: $maxWidth + px;
+    min-width: 320px;
+    margin: 0 auto;
+}
+
+input,
+button {
+    outline: none;
+    border: none;
+}
+
+button {
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+/*
+ * ==================================================================================
+ * grid
+ * ==================================================================================
+ */
+
+.container {
+    max-width: $widthContainer + 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 0 auto;
+}
+
+.row {
+    margin-left: -($columnGap / 2) + px;
+    margin-right: -($columnGap / 2) + px;
+}
+
+.col {
+    margin-right: ($columnGap / 2) + px;
+    margin-left: ($columnGap / 2) + px;
+}
