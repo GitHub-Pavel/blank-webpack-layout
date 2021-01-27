@@ -1,11 +1,15 @@
-// css
 import '@scss/main.scss'
 
-// svg
-// import loadSprite from '@modules/loadSprite'
+const pages = require('@modules/pages.config.json').pages
+pages.forEach((file) => {
+  require(`@pug/pages/${file}`)
+})
 
-// import SVGSprite from '@img/sprite.svg' 
+import loadSprite from '@modules/loadSprite'
+import SVGSprite from '@img/sprite.svg'
 
-// loadSprite(SVGSprite, {
-//   fill: false
-// })
+if (SVGSprite) {
+  loadSprite(SVGSprite, {
+    fill: false
+  })
+}

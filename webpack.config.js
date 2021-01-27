@@ -6,18 +6,29 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ImageminPlugin = require('imagemin-webpack')
 
+const fs = require('fs')
+
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev
 
 const filename = ext => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`
 
+const cb = () => {
+
+}
+
+const addPage = (page) => {
+  return new HTMLWebpackPlugin({
+    template: path.resolve(__dirname, paths.src + `/pug/pages/${page}`),
+    filename: path.resolve(__dirname, paths.dist + `/${page.split('.')[0]}.html`),
+    minify: {
+      collapseWhitespace: isProd
+    }
+  })
+}
+
 const plugins = () => {
   const basePlugins = [
-    new HTMLWebpackPlugin({
-      minify: {
-        collapseWhitespace: isProd
-      }
-    }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: `./css/${filename('css')}`
@@ -31,6 +42,34 @@ const plugins = () => {
       ]
     })
   ]
+
+  const pagesConfinUrl = paths.src + '/js/modules/pages.config.json'
+
+  fs.writeFile( pagesConfinUrl, '', cb)
+  fs.appendFile(pagesConfinUrl, '{"pages":[', cb)
+
+  const pages = fs.readdirSync(paths.src + '/pug/pages')
+
+
+  pages.forEach((file, value) => {
+    basePlugins.push(addPage(file))
+
+    let dot = ',',
+        pagesLength = 0
+
+    pages.forEach((file, value) => {
+      pagesLength = value
+    })
+
+    if (value === pagesLength) {
+      dot = ''
+    }
+
+
+    fs.appendFile(pagesConfinUrl, `"${file}"${dot}`, cb)
+  })
+
+  fs.appendFile(pagesConfinUrl, ']}', cb)
 
   if (isProd) {
     basePlugins.push(
@@ -175,9 +214,7 @@ module.exports = {
   },
   devServer: {
     contentBase: paths.dist,
-    historyApiFallback: true,
     hot: true,
-    inline: true,
     compress: true,
     port: 4200
   },

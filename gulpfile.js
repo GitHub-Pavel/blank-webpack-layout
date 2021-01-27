@@ -144,13 +144,3 @@ module.exports.default = gulp.parallel(
   _sprite,
   _watch
 )
-
-module.exports.pages = () => {
-  return fs.readdir( paths.src + '/pug/pages' , function (err, pages) {
-    if (pages) {
-      pages.forEach((index) => {
-        console.log(index)
-      })
-    }
-  })
-}
