@@ -43,12 +43,13 @@ const plugins = () => {
     })
   ]
 
+
   const pagesConfinUrl = paths.src + '/js/modules/pages.config.json'
+  const pages = fs.readdirSync(paths.src + '/pug/pages')
 
   fs.writeFile( pagesConfinUrl, '', cb)
   fs.appendFile(pagesConfinUrl, '{"pages":[', cb)
 
-  const pages = fs.readdirSync(paths.src + '/pug/pages')
 
 
   pages.forEach((file, value) => {
@@ -66,7 +67,7 @@ const plugins = () => {
     }
 
 
-    fs.appendFile(pagesConfinUrl, `"${file}"${dot}`, cb)
+    fs.appendFile(pagesConfinUrl, `"${file.split('.')[0]}"${dot}`, cb)
   })
 
   fs.appendFile(pagesConfinUrl, ']}', cb)
