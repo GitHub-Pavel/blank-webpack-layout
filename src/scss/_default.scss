@@ -8,6 +8,7 @@ a {
     font-size: inherit;
     font-weight: inherit;
     color: inherit;
+    line-height: inherit;
     text-decoration: underline;
     &:hover {
         text-decoration: none;
@@ -114,7 +115,7 @@ h4,
 h5,
 h6 {
     margin: 0;
-    font-family: "Arial",sans-serif;
+    font-family: "OpenSans",sans-serif;
     font-weight: $bold;
 }
 
