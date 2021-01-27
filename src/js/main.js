@@ -1,6 +1,6 @@
 import '@scss/main.scss'
 
-const pages = require('@modules/pages.config.json').pages
+import {pages} from '@modules/pages.config.json'
 pages.forEach((file) => {
   require(`@pug/pages/${file}.pug`)
 })

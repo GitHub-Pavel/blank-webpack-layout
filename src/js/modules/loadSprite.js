@@ -1,4 +1,4 @@
-module.exports = function(url, data) {
+export default function(url, data) {
   let ajax = new XMLHttpRequest()
   ajax.open("GET", url, true)
   ajax.send()
@@ -16,5 +16,5 @@ module.exports = function(url, data) {
     return document.body.insertBefore(elem, document.body.childNodes[0])
   }
 
-  return false
+  return console.error(url)
 }
