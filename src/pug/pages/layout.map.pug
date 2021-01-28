@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title layout map
+    link(rel="shortcut icon", href="favicon.ico", type="image/x-icon")
+
+    style(type='text/css').
+      :root {
+        --button-bg: #000;
+        --button-bg-hover: red;
+        --button-color: #000;
+        --button-color-hover: #fff;
+        --title: red;
+        --main: #000;
+      }
+
+      .layout-map {
+        margin: 0 auto;
+        max-width: 600px;
+        padding: 0 15px;
+      }
+
+      .header-map {
+        padding: 20px 0 40px;
+        background: ;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--title);
+      }
+
+      .section-map {
+        padding: 0 20px;
+      }
+
+      .section-map__table {
+        width: 100%;
+        border: 1px solid var(--main);
+      }
+
+      .section-map__table td, .section-map__table th {
+        padding: 5px 10px;
+        vertical-align: center;
+        text-align: center;
+        border: 1px solid var(--main);
+      }
+
+      .section-map__table span {
+        width: 100%;
+        display: block;
+        font-size: 16px;
+        text-transform: capitalize; 
+      }
+
+      .layout-map__button {
+        text-decoration: none;
+        display: inline-block;
+        padding: 5px 15px;
+        border: 1px solid var(--button-bg);
+        color: var(--button-color);
+        transition: color .2s, border-color .2s, background-color .2s;
+      }
+
+      .layout-map__button:hover {
+        background-color: var(--button-bg-hover);
+        border-color: var(--button-bg-hover);
+        color: var(--button-color-hover);
+      }
+  body
+    - var map = require("@modules/pages.config.json").pages
+
+    main.layout-map
+      header.header-map
+        h1 Карта сраниц верстки
+      // .header-map 
+      section.section-map
+        table.section-map__table
+          tr
+            th Название страницы
+            th Ссылка на страницу
+          - for(let i=0; i < map.length; i++)
+            if map[i] !== 'layout.map'
+              tr
+                td
+                  span= map[i]
+                td
+                  a(href=`${map[i]}.html`).layout-map__button
+                    | Перейти
+                  // .layout-map__button 
+        // .section-map__table 
+      // .section-map 
+    // .layout-map 

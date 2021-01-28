@@ -17,10 +17,21 @@ const cb = () => {
 
 }
 
+const length = mass => {
+  let count = 0
+
+  mass.forEach((index, value) => {
+    count = value
+  })
+
+  return count
+}
+
 const addPage = (page) => {
   return new HTMLWebpackPlugin({
-    template: path.resolve(__dirname, paths.src + `/pug/pages/${page}`),
-    filename: path.resolve(__dirname, paths.dist + `/${page.split('.')[0]}.html`),
+    template: path.resolve(__dirname, paths.src + `/pug/pages/${page}.pug`),
+    filename: path.resolve(__dirname, paths.dist + `/${page}.html`),
+    inject: page !== 'layout.map',
     minify: {
       collapseWhitespace: isProd
     }
@@ -53,21 +64,32 @@ const plugins = () => {
 
 
   pages.forEach((file, value) => {
-    basePlugins.push(addPage(file))
+    let dot = ','
 
-    let dot = ',',
-        pagesLength = 0
-
-    pages.forEach((file, value) => {
-      pagesLength = value
-    })
-
-    if (value === pagesLength) {
+    if (value === length(pages)) {
       dot = ''
     }
 
+    file = file.split('.')
 
-    fs.appendFile(pagesConfinUrl, `"${file.split('.')[0]}"${dot}`, cb)
+    let newFile = ''
+
+    if (length(file) > 1) {
+      for (let i=0; i < length(file); i++) {
+        let dotFile = '.'
+
+        if (i===0) {
+          dotFile = ''
+        }
+
+        newFile += dotFile + file[i]
+      } 
+    } else {
+      newFile = file[0]
+    }
+
+    fs.appendFile(pagesConfinUrl, `"${newFile}"${dot}`, cb)
+    basePlugins.push(addPage(newFile))
   })
 
   fs.appendFile(pagesConfinUrl, ']}', cb)
