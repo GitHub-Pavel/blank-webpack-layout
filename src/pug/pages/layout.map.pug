@@ -20,10 +20,11 @@ html(lang="en")
         margin: 0 auto;
         max-width: 600px;
         padding: 0 15px;
+        font-family: sans-serif;
       }
 
       .header-map {
-        padding: 20px 0 40px;
+        padding: 20px 0 30px;
         background: ;
       }
 
@@ -87,7 +88,7 @@ html(lang="en")
                 td
                   span= map[i]
                 td
-                  a(href=`${map[i]}.html`).layout-map__button
+                  a(href=`${map[i]}.html`, target="_blank").layout-map__button
                     | Перейти
                   // .layout-map__button 
         // .section-map__table 
