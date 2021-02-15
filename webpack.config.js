@@ -43,14 +43,6 @@ const plugins = () => {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: `./css/${filename('css')}`
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, paths.src + '/assets'),
-          to: path.resolve(__dirname, paths.dist )
-        }
-      ]
     })
   ]
 
@@ -196,7 +188,7 @@ module.exports = {
       },
       {
         test: /\.(jp(e*)g|png|gif|webp|mp4)$/,
-        exclude: '/src/assets/',
+        exclude: path.resolve(__dirname, paths.src + '/assets/' ),
         loader: 'file-loader',
         options: {
           name: `[path]${filename('[ext]')}`
