@@ -57,19 +57,11 @@ const plugins = () => {
 
   const pagesConfinUrl = paths.src + '/js/modules/pages.config.json'
   const pages = fs.readdirSync(paths.src + '/pug/pages')
+  let pagesArray = {pages: []}
 
   fs.writeFile( pagesConfinUrl, '', cb)
-  fs.appendFile(pagesConfinUrl, '{"pages":[', cb)
 
-
-
-  pages.forEach((file, value) => {
-    let dot = ','
-
-    if (value === length(pages)) {
-      dot = ''
-    }
-
+  pages.forEach(file => {
     file = file.split('.')
 
     let newFile = ''
@@ -88,11 +80,11 @@ const plugins = () => {
       newFile = file[0]
     }
 
-    fs.appendFile(pagesConfinUrl, `"${newFile}"${dot}`, cb)
+    pagesArray.pages.push(newFile)
     basePlugins.push(addPage(newFile))
   })
 
-  fs.appendFile(pagesConfinUrl, ']}', cb)
+  fs.appendFile(pagesConfinUrl, JSON.stringify(pagesArray), cb)
 
   if (isProd) {
     basePlugins.push(
@@ -161,6 +153,7 @@ module.exports = {
       '@scss': path.resolve(__dirname, paths.src + '/scss'),
       '@modules': path.resolve(__dirname, paths.src + '/js/modules'),
       '@js': path.resolve(__dirname, paths.src + '/js'),
+      '@video': path.resolve(__dirname, paths.src + '/video'),
       '@assets': path.resolve(__dirname, paths.src + '/assets')
     }
   },
@@ -180,10 +173,7 @@ module.exports = {
         test: /\.css$/i,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: true
-            }
+            loader: MiniCssExtractPlugin.loader
           },
           'css-loader',
           {
@@ -205,11 +195,11 @@ module.exports = {
         use: preprocessor('less-loader')
       },
       {
-        test: /\.(jp(e*)g|png|gif|webp)$/,
+        test: /\.(jp(e*)g|png|gif|webp|mp4)$/,
         exclude: '/src/assets/',
         loader: 'file-loader',
         options: {
-          name: `./img/${filename('[ext]')}`
+          name: `[path]${filename('[ext]')}`
         }
       },
       {
@@ -217,7 +207,7 @@ module.exports = {
         include: /.*sprite\.svg/,
         loader: 'file-loader',
         options: {
-          name: `./img/${filename('[ext]')}`
+          name: `[path]${filename('[ext]')}`
         }
       },
       {
@@ -225,7 +215,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: './fonts/[name].[ext]'
+          name: '[path][name].[ext]'
         }
       },
       {

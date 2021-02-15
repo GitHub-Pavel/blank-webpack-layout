@@ -20,9 +20,14 @@ $black: 900 !default;
  * ==================================================================================
  */
 
-$black-color: #000 !default;
-$grey: #555 !default;
-$white: #fff !default;
+:root {
+  --black: #111111;
+  --white: #ffffff;
+
+  --blue: #2F47C2;
+  --light-blue: #677BE2;
+  --blue-sky: #8EAEFF;
+}
 
 /* 
  * ==================================================================================
@@ -46,7 +51,13 @@ $white: #fff !default;
  * ==================================================================================
  */
 
-$widthContainer: 1170 !default; // size is in "px"
+$widthContainer: 1400 !default; // size is in "px"
 $maxWidth: 1920 !default; // size is in "px"
 
-$columnGap: 30 !default; // size is in "px"
+:root {
+  --column-gap: 30;
+
+  @media (max-width: $sm + px) {
+    --column-gap: 15
+  }
+}

@@ -17,7 +17,7 @@
  */
 
 html {
-    font-size: 16px;
+    font-size: 10px;
 }
 
 /*
@@ -27,9 +27,7 @@ html {
  */
 
 body {
-    color: $black-color;
-    font-family: "OpenSans", sans-serif;
-    font-size: 1rem;
+    font-family: "Montserrat", sans-serif;
 }
 
 /*
@@ -38,8 +36,7 @@ body {
  * ==================================================================================
  */
 
-img,
-svg {
+img {
     max-width: 100%;
     height: auto;
 }
@@ -54,6 +51,7 @@ svg {
     max-width: $maxWidth + px;
     min-width: 320px;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 input,
@@ -66,6 +64,11 @@ button {
     background: transparent;
     cursor: pointer;
     padding: 0;
+    font-family: inherit;
+}
+
+ul {
+    padding-left: 20px;
 }
 
 /*
@@ -82,11 +85,42 @@ button {
 }
 
 .row {
-    margin-left: -($columnGap / 2) + px;
-    margin-right: -($columnGap / 2) + px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -(var(--column-gap) / 2) + px;
+    margin-right: -(var(--column-gap) / 2) + px;
 }
 
-.col {
-    margin-right: ($columnGap / 2) + px;
-    margin-left: ($columnGap / 2) + px;
+/*
+ * ==================================================================================
+ * link
+ * ==================================================================================
+ */
+
+a {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    line-height: inherit;
+    text-decoration: underline;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+/*
+ * ==================================================================================
+ * visually-hidden
+ * ==================================================================================
+ */
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    clip: rect(0 0 0 0);
 }

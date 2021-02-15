@@ -1,0 +1,62 @@
+.h1 {
+  font-size: 4.8rem;
+  margin-bottom: 0.48em;
+  position: relative;
+
+  &__elem {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+     &--first {
+      animation: titleFirst .5s linear infinite alternate;
+     }
+
+     &--second {
+      animation: titleSecond .5s linear infinite alternate;
+     }
+
+     &--third {
+      animation: titleThird .5s linear infinite alternate;
+     }
+  }
+
+  &__text {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.h2 {
+  font-size: 3.2rem;
+}
+
+@keyframes titleFirst {
+  from {
+    transform: translate(0,0);
+  }
+
+  to {
+    transform: translate(-3px,-3px);
+  }
+}
+
+@keyframes titleSecond {
+  from {
+    transform: translate(0,0);
+  }
+
+  to {
+    transform: translate(-6px,-6px);
+  }
+}
+
+@keyframes titleThird {
+  from {
+    transform: translate(0,0);
+  }
+
+  to {
+    transform: translate(-9px,-9px);
+  }
+}

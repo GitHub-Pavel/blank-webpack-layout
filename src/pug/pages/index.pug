@@ -1,6 +1,15 @@
 extends /common/layout
 
 block content
-  section
-    .container
-      h1 index
+  section.hero
+    .container.hero__container
+      h1.h1.text--center 
+        span.h1__elem.h1__elem--third.text--blue-sky Pacific Ocean
+        span.h1__elem.h1__elem--second.text--light-blue Pacific Ocean
+        span.h1__elem.h1__elem--first.text--blue Pacific Ocean
+        span.h1__text Pacific Ocean
+      svg(width="50", height="50").hero__icon
+        use(href="#home")
+      // .hero__icon 
+      h2.h2.text--center Welcom to the po template!
+      video(src=require("@video/cat.mp4").default, width="560", height="340", autoplay, muted, loop).hero__video

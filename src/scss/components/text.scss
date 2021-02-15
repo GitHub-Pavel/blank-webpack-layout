@@ -1,0 +1,56 @@
+.text {
+  font-size: 1.6rem;
+  color: var(--black);
+
+  &--small {
+      font-size: 1.4rem;
+  }
+
+  &--big {
+      font-size: 1.8rem;
+  }
+
+  &--bold {
+      font-weight: $bold;
+  }
+  
+  &--light {
+      font-weight: $light;
+  }
+  
+  &--italic {
+      font-style: italic;
+  }
+
+  &--center {
+      text-align: center;
+  }
+
+  &--nowrap {
+      white-space: nowrap;
+  }
+
+  &--uppercase {
+      text-transform: uppercase;
+  }
+
+  &--blue {
+    color: var(--blue);
+  }
+
+  &--light-blue {
+    color: var(--light-blue);
+  }
+
+  &--blue-sky {
+    color: var(--blue-sky);
+  }
+}
+
+p {
+  margin-top: 1.875em;
+}
+
+.text {
+  margin-top: 0;
+}
